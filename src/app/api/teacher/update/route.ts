@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest) {
         connectDB();
         const { name, email, department, subject , teacherId} = await req.json()
 
-        if (!name || !email || !department || !subject) {
+        if (!name || !email || !department || !subject || !teacherId) {
             return NextResponse.json({
                 message: "missing fields"
             }, { status: 400 })

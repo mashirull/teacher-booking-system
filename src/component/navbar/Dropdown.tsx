@@ -36,7 +36,7 @@ const Dropdown = ({user, setToken}:{user:User, setToken : ()=>void}) => {
                     <Typography sx={{textAlign:"center", mb: 2}}>{user?.role}</Typography>
                     <Typography sx={{fontSize:14}}>{user?.email}</Typography>
                 </Box>
-                {user?.role === "admin" && <MenuItem sx={{ fontSize: 14 }} >Dashboard</MenuItem>}
+                {user?.role === "admin" && <MenuItem sx={{ fontSize: 14 }} onClick={()=>{router.push("/admin-dashboard"), setAnchorEl(null)}} >Dashboard</MenuItem>}
                 {/* <MenuItem sx={{ fontSize: 14 }} >My application</MenuItem> */}
                 <Button onClick={logoutHandler}>Logout<LogoutIcon/></Button>
             </Menu>

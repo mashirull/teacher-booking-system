@@ -1,5 +1,5 @@
 import { getToken } from "@/lib/getToken";
-import { Teacher } from "@/type/type";
+import { Student, Teacher } from "@/type/type";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
@@ -32,7 +32,29 @@ export const fetchStudent = createAsyncThunk("student/list", async () => {
     if (!responce.ok) {
         throw new Error(data.message)
     }
+    
+    return data
+})
 
+export const approvedRegistration = createAsyncThunk("student/approval", async ({ studentId, status }: Student) => {
+    const responce = await fetch(base_url + "/api/admin/approve-student-reg", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            token: getToken()
+        },
+        body: JSON.stringify({ studentId, status })
+
+    })
+
+    console.log(studentId);
+    
+
+    const data = await responce.json()
+    if (!responce.ok) {
+        throw new Error(data.error)
+    }
+    
     return data
 })
 
@@ -51,6 +73,21 @@ const studentSlice = createSlice({
                 state.studentData = action.payload.students
             })
             .addCase(fetchStudent.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.error.message
+            })
+
+        // approved student registration
+        builder.addCase(approvedRegistration.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+            state.success = null
+        })
+            .addCase(approvedRegistration.fulfilled, (state, action: PayloadAction<{ message : string }>) => {
+                state.isLoading = false
+                state.success = action.payload.message
+            })
+            .addCase(approvedRegistration.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.error.message
             })

@@ -59,8 +59,8 @@ const theme = createTheme({
 
             styleOverrides: {
                 root: {
-                    "&.Mui-disabled": {
-                        backgroundColor: "#bdbdbd",   // your disabled bg
+                    "&.Mui-disabled": { 
+                        background : "#757575" , // your disabled bg
                         color: "#fff",             // text color
                         // opacity: 0.7,                 // optional
                     },

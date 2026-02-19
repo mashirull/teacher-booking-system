@@ -13,10 +13,10 @@ export async function PUT(req: NextRequest) {
         
         const {role} =  verifyAuth(req)
 
-        if(!['pending', 'approved'].includes(status)){
+        if(!['pending', 'approved','rejected'].includes(status)){
             return NextResponse.json({
                 message: "Invalid status"
-            }, { status: 40 })
+            }, { status: 400 })
         }
 
         if (role !== "admin") {

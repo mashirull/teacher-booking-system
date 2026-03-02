@@ -28,7 +28,7 @@ export const Navbar = () => {
 
 
     return (
-        <AppBar position='static'>
+        <AppBar position='fixed'>
             <Toolbar sx={{ display: "flex" , justifyContent : "space-between" , alignItems : "center"}}>
                 <Typography variant='h6'>
                     Teacher Booking System

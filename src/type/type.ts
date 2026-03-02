@@ -25,3 +25,14 @@ export interface Student {
     status : string
     studentId?: string
 }
+
+export interface Appointment {
+    _id? : string
+    studentId : Student
+    date : Date
+    time : string
+    status : string
+    teacherId : Teacher
+    appointmentId : string
+    createdAt ?: Date
+}

@@ -8,8 +8,10 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store/store';
 import { logout } from '@/redux/slices/authSlice';
 import { User } from '@/type/type';
+import { green, red, yellow } from '@mui/material/colors';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
-const Dropdown = ({user, setToken}:{user:User, setToken : ()=>void}) => {
+const Dropdown = ({ user, setToken }: { user: User, setToken: () => void }) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const router = useRouter()
@@ -32,13 +34,16 @@ const Dropdown = ({user, setToken}:{user:User, setToken : ()=>void}) => {
                 <Avatar sx={{ bgcolor: "secondary.main", cursor: "pointer" }} >{(user?.name)[0].toLocaleUpperCase()}</Avatar>
             </Button>
             <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)} >
-                <Box sx={{padding :2}}>
-                    <Typography sx={{textAlign:"center", mb: 2}}>{user?.role}</Typography>
-                    <Typography sx={{fontSize:14}}>{user?.email}</Typography>
+                <Box sx={{ padding: 2 }}>
+                    <Typography sx={{ textAlign: "center" , mb:2 }}> {user.status && user.status === "approved" && <span><HowToRegIcon/></span>} {user?.role}</Typography>
+                   
+                        {/* <Typography sx={{ textAlign: "center", fontSize: 12 , borderRadius:5 , backgroundColor : user.status === "pending" ? yellow[300] : green[300] }}>{user.status}</Typography> */}
+                
+                    <Typography sx={{ fontSize: 14 }}>{user?.email}</Typography>
                 </Box>
-                {user?.role === "admin" && <MenuItem sx={{ fontSize: 14 }} onClick={()=>{router.push("/admin-dashboard"), setAnchorEl(null)}} >Dashboard</MenuItem>}
+                {user?.role === "admin" && <MenuItem sx={{ fontSize: 14 }} onClick={() => { router.push("/admin-dashboard"), setAnchorEl(null) }} >Dashboard</MenuItem>}
                 {/* <MenuItem sx={{ fontSize: 14 }} >My application</MenuItem> */}
-                <Button onClick={logoutHandler}>Logout<LogoutIcon/></Button>
+                <Button onClick={logoutHandler}>Logout<LogoutIcon /></Button>
             </Menu>
         </>
     )

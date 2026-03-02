@@ -11,6 +11,11 @@ const messageSchema =  new Schema({
         ref : "teachers",
         required : true
     },
+    appointmentId : {
+        type : Schema.Types.ObjectId,
+        ref : "appointment",
+        required : true
+    },
     messageText : {
         type : String,
         required : true

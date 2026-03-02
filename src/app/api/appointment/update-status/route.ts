@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest) {
         connectDB();
         const {appointmentId, status} = await req.json()
 
-        if(!["pending", "approved", "cancel"].includes(status)){
+        if(!["pending", "approved", "canceled"].includes(status)){
             return NextResponse.json({
                 message : "Invalid status"
             },{status : 400})

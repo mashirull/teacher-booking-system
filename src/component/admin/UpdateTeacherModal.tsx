@@ -1,4 +1,4 @@
-import { addNewTeacher, updateTeacher } from '@/redux/slices/TeacherSlice';
+import {  updateTeacher } from '@/redux/slices/TeacherSlice';
 import { AppDispatch, RootState } from '@/redux/store/store';
 import { Teacher } from '@/type/type';
 import { Alert, Box, Button, CircularProgress, Modal, TextField, Typography } from '@mui/material'

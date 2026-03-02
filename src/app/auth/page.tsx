@@ -12,9 +12,9 @@ const page = () => {
             Welcome to Student Teacher Booking System
         </Typography>
         <Box sx={{display:"flex" , flexDirection : "column" , gap: 3, alignItems : "center", justifyContent : "center" , padding: "20px"}}>
-            <Button variant='gradient' onClick={()=>{router.push("/auth/login?user=student")}}>Login as Student</Button>
-            <Button variant='gradient' onClick={()=>{router.push("/auth/login?user=teacher")}}>Login as Teacher</Button>
-            <Button variant='gradient' onClick={()=>{router.push("/auth/login?user=admin")}}>Login as Admin</Button>
+            <Button variant='outlinedWhite' onClick={()=>{router.push("/auth/login?user=student")}} sx={{padding: "15px 40px", color:"black" , fontWeight:600}}>Login as Student</Button>
+            <Button variant='outlinedWhite' onClick={()=>{router.push("/auth/login?user=teacher")}} sx={{padding: "15px 40px", color:"black" , fontWeight:600}}>Login as Teacher</Button>
+            <Button variant='outlinedWhite' onClick={()=>{router.push("/auth/login?user=admin")}} sx={{padding: "15px 40px", color:"black" , fontWeight:600}}>Login as Admin</Button>
         </Box>
     </Container>
   )

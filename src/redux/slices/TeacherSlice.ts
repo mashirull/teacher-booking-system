@@ -7,6 +7,7 @@ import { Teacher } from "@/type/type";
 
 interface InitialState {
     teacherData: [] | null
+    singleTeacher : Teacher  | null
     isLoading: Boolean
     error: String | null
     success: String | null
@@ -16,7 +17,8 @@ const initialState: InitialState = {
     teacherData: null,
     isLoading: false,
     error: null,
-    success: null
+    success: null,
+    singleTeacher : null
 }
 
 const base_url = process.env.NEXT_PUBLIC_BASE_URL
@@ -96,6 +98,28 @@ export const updateTeacher = createAsyncThunk("teacher/update", async ({ name, e
     return data
 })
 
+
+// fetching single teacher
+export const fetchTeacherById = createAsyncThunk("teacher/[teacherId]", async ({ teacherId }: Teacher) => {
+    const responce = await fetch(base_url + "/api/teacher/" + teacherId, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            token: getToken()
+        },
+
+    })
+
+    const data = await responce.json()
+    if (!responce.ok) {
+        throw new Error(data.message)
+    }
+
+    return data
+})
+
+
+
 export const teacherSlice = createSlice({
     name: "teacher-slice",
     initialState,
@@ -143,7 +167,7 @@ export const teacherSlice = createSlice({
                 state.isLoading = false
                 state.error = action.error.message
             })
-        
+
         // for update teacher
         builder.addCase(updateTeacher.pending, (state) => {
             state.isLoading = true
@@ -155,6 +179,22 @@ export const teacherSlice = createSlice({
                 state.success = action.payload.message
             })
             .addCase(updateTeacher.rejected, (state, action) => {
+                state.isLoading = false
+                state.error = action.error.message
+            })
+
+
+            // fetching signle teacher
+        builder.addCase(fetchTeacherById.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+            // state.success = null
+        })
+            .addCase(fetchTeacherById.fulfilled, (state, action: PayloadAction<{ teacher: Teacher }>) => {
+                state.isLoading = false
+                state.singleTeacher = action.payload.teacher
+            })
+            .addCase(fetchTeacherById.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.error.message
             })

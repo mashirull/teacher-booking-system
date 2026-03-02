@@ -14,11 +14,12 @@ export async function POST(req:NextRequest) {
         }, {status:401})
        }
 
-       const {teacherId, messageText} =  await req.json();
+       const {teacherId, messageText, appointmentId} =  await req.json();
 
        const msg = await message.create({
         studentId : userId,
         teacherId,
+        appointmentId,
         messageText
        });
 

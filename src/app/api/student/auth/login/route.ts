@@ -42,7 +42,8 @@ export async function POST(req: Request) {
             user : {
                 name : CurrentStudent.name,
                 email : CurrentStudent.email,
-                role : CurrentStudent.role
+                role : CurrentStudent.role,
+                status : CurrentStudent.status
             },
             token 
         }, {status : 200})

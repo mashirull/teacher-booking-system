@@ -1,4 +1,5 @@
 "use client"
+import TableCellCard from '@/component/admin/TableCellCard'
 import FullScreenLoader from '@/loader/FullScreanLoder'
 import { approvedRegistration, fetchStudent } from '@/redux/slices/studentSlice'
 import { AppDispatch, RootState } from '@/redux/store/store'
@@ -62,7 +63,8 @@ const page = () => {
                                 <TableRow key={student._id}>
                                     <TableCell>{student.name}</TableCell>
                                     <TableCell>{student.email}</TableCell>
-                                    <TableCell sx={student.status === "pending" ? { color: "#9b8401" } : student.status === "approved" ? { color: "green" } : { color: "red" }}>
+                                    <TableCellCard student={student}/>
+                                    {/* <TableCell sx={student.status === "pending" ? { color: "#9b8401" } : student.status === "approved" ? { color: "green" } : { color: "red" }}>
                                         {student.status}
                                         <Select sx={{
                                             ml: 2, p: 0, border: "none",
@@ -78,7 +80,7 @@ const page = () => {
                                             <MenuItem value="rejected" >rejected</MenuItem>
                                         </Select>
                                         <Button variant='gradient' sx={{ ml: 2 }} disabled={isDisable} onClick={() => { handleUpdate() }}>Update</Button>
-                                    </TableCell>
+                                    </TableCell> */}
 
                                     {/* <TableCell>
                                         <Button sx={{ color: "green" }} onClick={() => { setOpenUpdateModal(true), setTeacherUpdateData(teacher) }}>
